@@ -18,6 +18,7 @@ namespace RomanNumeralsSpecs {
         [TestCase(7, "VII")]
         [TestCase(8, "VIII")]
         [TestCase(9, "IX")]
+        [TestCase(10, "X")]
         public void calculate_the_roman_numeral_from_normal_number(int number, string roman) {
             string result = RomanNumeral.FromNumberToRoman(number);
             Assert.AreEqual(roman, result);
