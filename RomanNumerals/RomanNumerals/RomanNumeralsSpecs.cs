@@ -15,6 +15,7 @@ namespace RomanNumeralsSpecs {
         [TestCase(4, "IV")]
         [TestCase(5, "V")]
         [TestCase(6, "VI")]
+        [TestCase(7, "VII")]
         public void calculate_the_roman_numeral_from_normal_number(int number, string roman) {
             string result = RomanNumeral.FromNumberToRoman(number);
             Assert.AreEqual(roman, result);
@@ -46,7 +47,7 @@ namespace RomanNumeralsSpecs {
 
             if (previous == next) return letters.ElementAt(previous).Value;
             if (letters.ElementAt(next).Key - number == 1) return string.Concat(letters.ElementAt(previous).Value, letters.ElementAt(next).Value);
-            if (number - letters.ElementAt(previous).Key == 1) return string.Concat(letters.ElementAt(previous).Value, "I");
+            if (number > letters.ElementAt(previous).Key) return string.Concat(letters.ElementAt(previous).Value, string.Concat(Enumerable.Repeat("I", number - letters.ElementAt(previous).Key)));
             return string.Concat(Enumerable.Repeat(letters.ElementAt(previous).Value, number));
         }
     }
