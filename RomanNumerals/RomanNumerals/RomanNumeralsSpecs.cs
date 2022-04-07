@@ -14,6 +14,7 @@ namespace RomanNumeralsSpecs {
         [TestCase(3, "III")]
         [TestCase(4, "IV")]
         [TestCase(5, "V")]
+        [TestCase(6, "VI")]
         public void calculate_the_roman_numeral_from_normal_number(int number, string roman) {
             string result = RomanNumeral.FromNumberToRoman(number);
             Assert.AreEqual(roman, result);
@@ -23,7 +24,8 @@ namespace RomanNumeralsSpecs {
     public class RomanNumeral {
         private static Dictionary<int, string> letters = new Dictionary<int, string> {
             { 1, "I" },
-            { 5, "V" }
+            { 5, "V" },
+            { 10, "X"}
         };
 
         public static string FromNumberToRoman(int number) {
@@ -35,14 +37,16 @@ namespace RomanNumeralsSpecs {
                     next = i;
                     break;
                 }
-                else if (letters.ElementAt(i).Key > number) {
+                if (letters.ElementAt(i).Key > number) {
                     previous = i - 1;
                     next = i;
+                    break;
                 }
             }
 
             if (previous == next) return letters.ElementAt(previous).Value;
             if (letters.ElementAt(next).Key - number == 1) return string.Concat(letters.ElementAt(previous).Value, letters.ElementAt(next).Value);
+            if (number - letters.ElementAt(previous).Key == 1) return string.Concat(letters.ElementAt(previous).Value, "I");
             return string.Concat(Enumerable.Repeat(letters.ElementAt(previous).Value, number));
         }
     }
