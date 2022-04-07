@@ -19,6 +19,7 @@ namespace RomanNumeralsSpecs {
         [TestCase(8, "VIII")]
         [TestCase(9, "IX")]
         [TestCase(10, "X")]
+        [TestCase(11, "XI")]
         public void calculate_the_roman_numeral_from_normal_number(int number, string roman) {
             string result = RomanNumeral.FromNumberToRoman(number);
             Assert.AreEqual(roman, result);
@@ -29,7 +30,8 @@ namespace RomanNumeralsSpecs {
         private static Dictionary<int, string> letters = new Dictionary<int, string> {
             { 1, "I" },
             { 5, "V" },
-            { 10, "X"}
+            { 10, "X"},
+            { 50, "L"}
         };
 
         public static string FromNumberToRoman(int number) {
