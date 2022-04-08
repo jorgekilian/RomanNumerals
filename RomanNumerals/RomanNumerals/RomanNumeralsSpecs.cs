@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using NUnit.Framework;
@@ -22,6 +23,7 @@ namespace RomanNumeralsSpecs {
         [TestCase(11, "XI")]
         [TestCase(12, "XII")]
         [TestCase(13, "XIII")]
+        [TestCase(14, "XIV")]
         public void calculate_the_roman_numeral_from_normal_number(int number, string roman) {
             string result = RomanNumeral.FromNumberToRoman(number);
             Assert.AreEqual(roman, result);
@@ -54,7 +56,11 @@ namespace RomanNumeralsSpecs {
 
             if (previous == next) return letters.ElementAt(previous).Value;
             if (letters.ElementAt(next).Key - number == 1) return string.Concat("I", letters.ElementAt(next).Value);
-            if (number > letters.ElementAt(previous).Key) return string.Concat(letters.ElementAt(previous).Value, string.Concat(Enumerable.Repeat("I", number - letters.ElementAt(previous).Key)));
+            if (number > letters.ElementAt(previous).Key)
+                if (number - letters.ElementAt(previous).Key < 4)
+                    return string.Concat(letters.ElementAt(previous).Value, string.Concat(Enumerable.Repeat("I", number - letters.ElementAt(previous).Key)));
+                else
+                    return string.Concat(letters.ElementAt(previous).Value, "I", letters.ElementAt(previous - 1).Value);
             return string.Concat(Enumerable.Repeat(letters.ElementAt(previous).Value, number));
         }
     }
