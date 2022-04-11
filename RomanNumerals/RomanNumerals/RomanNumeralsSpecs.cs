@@ -27,13 +27,17 @@ namespace RomanNumeralsSpecs {
         [TestCase(20, "XX")]
         [TestCase(21, "XXI")]
         [TestCase(22, "XXII")]
+        [TestCase(24, "XXIV")]
         [TestCase(25, "XXV")]
         [TestCase(26, "XXVI")]
+        [TestCase(29, "XXIX")]
         [TestCase(30, "XXX")]
         [TestCase(31, "XXXI")]
         [TestCase(32, "XXXII")]
+        [TestCase(34, "XXXIV")]
         [TestCase(35, "XXXV")]
         [TestCase(36, "XXXVI")]
+        [TestCase(40, "XL")]
         [TestCase(50, "L")]
         [TestCase(100, "C")]
         [TestCase(500, "D")]
@@ -73,8 +77,12 @@ namespace RomanNumeralsSpecs {
         private string GetIrregularNumber(int number) {
             if (number == 4) return string.Concat(letters.ElementAt(0).Value, letters.ElementAt(1).Value);
             if (number == 9) return string.Concat(letters.ElementAt(0).Value, letters.ElementAt(2).Value);
-            if (number == 14) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(1).Value); ;
-            if (number == 19) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(2).Value); ;
+            if (number == 14) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(1).Value); 
+            if (number == 19) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(2).Value); 
+            if (number == 24) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(1).Value); 
+            if (number == 29) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(2).Value); 
+            if (number == 34) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(2).Value, letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(1).Value); 
+            if (number == 40) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(3).Value); 
             return string.Empty;
         }
 
