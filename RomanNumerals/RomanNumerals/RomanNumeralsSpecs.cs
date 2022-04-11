@@ -70,9 +70,9 @@ namespace RomanNumeralsSpecs {
         }
 
         private string GetIrregularNumber(int number) {
-            if (number == 4 ) return "IV";
-            if (number == 9) return "IX";
-            if (number == 14) return "XIV";
+            if (number == 4) return string.Concat(letters.ElementAt(0).Value, letters.ElementAt(1).Value);
+            if (number == 9) return string.Concat(letters.ElementAt(0).Value, letters.ElementAt(2).Value);
+            if (number == 14) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(1).Value); ;
             return string.Empty;
         }
 
