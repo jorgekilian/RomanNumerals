@@ -23,6 +23,7 @@ namespace RomanNumeralsSpecs {
         [TestCase(16, "XVI")]
         [TestCase(17, "XVII")]
         [TestCase(18, "XVIII")]
+        [TestCase(19, "XIX")]
         [TestCase(20, "XX")]
         [TestCase(21, "XXI")]
         [TestCase(22, "XXII")]
@@ -73,6 +74,7 @@ namespace RomanNumeralsSpecs {
             if (number == 4) return string.Concat(letters.ElementAt(0).Value, letters.ElementAt(1).Value);
             if (number == 9) return string.Concat(letters.ElementAt(0).Value, letters.ElementAt(2).Value);
             if (number == 14) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(1).Value); ;
+            if (number == 19) return string.Concat(letters.ElementAt(2).Value, letters.ElementAt(0).Value, letters.ElementAt(2).Value); ;
             return string.Empty;
         }
 
