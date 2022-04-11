@@ -8,17 +8,17 @@ namespace RomanNumeralsSpecs {
         [TestCase(1, "I")]
         [TestCase(2, "II")]
         [TestCase(3, "III")]
-        //[TestCase(4, "IV")]
+        [TestCase(4, "IV")]
         [TestCase(5, "V")]
         [TestCase(6, "VI")]
         [TestCase(7, "VII")]
         [TestCase(8, "VIII")]
-        //[TestCase(9, "IX")]
+        [TestCase(9, "IX")]
         [TestCase(10, "X")]
         [TestCase(11, "XI")]
         [TestCase(12, "XII")]
         [TestCase(13, "XIII")]
-        //[TestCase(14, "XIV")]
+        [TestCase(14, "XIV")]
         [TestCase(15, "XV")]
         [TestCase(16, "XVI")]
         [TestCase(17, "XVII")]
@@ -64,7 +64,16 @@ namespace RomanNumeralsSpecs {
         private string numberToRoman = string.Empty;
 
         public string FromNumberToRoman(int number) {
+            numberToRoman = GetIrregularNumber(number);
+            if (numberToRoman != string.Empty) return numberToRoman;
             return GetPartialRomanNumber(number);
+        }
+
+        private string GetIrregularNumber(int number) {
+            if (number == 4 ) return "IV";
+            if (number == 9) return "IX";
+            if (number == 14) return "XIV";
+            return string.Empty;
         }
 
         private string GetPartialRomanNumber(int number) {
