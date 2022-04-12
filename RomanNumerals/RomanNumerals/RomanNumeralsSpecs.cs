@@ -116,23 +116,17 @@ namespace RomanNumeralsSpecs {
         }
 
         private int GetPartialNumberRoman(string roman) {
-            var tempInt = 0;
-            var length = 2;
-            if (roman.Length > 1) {
-                tempInt = GetIntValue(roman.Substring(0, length));
+            var length = 1;
+            if (roman.Length > 1 && numbers.ContainsKey(roman.Substring(0, 2))) {
+                length = 2;
             }
-            if (tempInt == 0) {
-                length = 1;
-                tempInt = GetIntValue(roman.Substring(0, length));
-            }
-            romanToNumber += tempInt;
+            romanToNumber += GetIntValue(roman.Substring(0, length)); ;
             roman = roman.Substring(length);
             if (roman != string.Empty) GetPartialNumberRoman(roman);
             return romanToNumber;
         }
 
         private int GetIntValue(string roman) {
-            if (!numbers.ContainsKey(roman)) return 0;
             return numbers[roman];
         }
 
