@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 
 namespace RomanNumeralsSpecs {
     public class Tests {
@@ -58,6 +60,8 @@ namespace RomanNumeralsSpecs {
         [TestCase("I", 1)]
         [TestCase("II", 2)]
         [TestCase("III", 3)]
+        [TestCase("IV", 4)]
+        [TestCase("V", 5)]
         public void calculate_the_normal_numeral_from_roman_number(string roman, int number) {
             var romanNum = new RomanNumeral();
 
@@ -111,13 +115,25 @@ namespace RomanNumeralsSpecs {
         }
 
         private int GetPartialNumberRoman(string roman) {
-            romanToNumber += GetIntValue(roman.Substring(0, 1));
-            roman = roman.Substring(1);
+            var tempInt = 0;
+            var cortar = 1;
+            if (roman.Length > 1) {
+                tempInt = GetIntValue(roman.Substring(0, 2));
+            }
+            if (tempInt == 0) {
+                tempInt = GetIntValue(roman.Substring(0, 1));
+            }
+            else {
+                cortar = 2;
+            }
+            romanToNumber += tempInt;
+            roman = roman.Substring(cortar);
             if (roman != string.Empty) GetPartialNumberRoman(roman);
             return romanToNumber;
         }
 
         private int GetIntValue(string roman) {
+            if (!numbers.ContainsKey(roman)) return 0;
             return numbers[roman];
         }
 
