@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -53,6 +54,17 @@ namespace RomanNumeralsSpecs {
 
             Assert.AreEqual(roman, result);
         }
+
+        [TestCase("I", 1)]
+        [TestCase("II", 2)]
+        [TestCase("III", 3)]
+        public void calculate_the_normal_numeral_from_roman_number(string roman, int number) {
+            var romanNum = new RomanNumeral();
+
+            var result = romanNum.FromRomanToNumber(roman);
+
+            Assert.AreEqual(number, result);
+        }
     }
 
     public class RomanNumeral {
@@ -72,10 +84,41 @@ namespace RomanNumeralsSpecs {
             { 1000, "M"}
         };
 
+        private readonly Dictionary<string, int> numbers = new Dictionary<string, int> {
+            { "I" , 1},
+            { "IV" , 4},
+            { "V" , 5},
+            { "IX", 9},
+            { "X", 10},
+            { "XL", 40},
+            { "L", 50},
+            { "XC", 90},
+            { "C", 100},
+            { "CD", 400},
+            { "D", 500},
+            { "CM", 900},
+            { "M", 1000}
+        };
+
         private string numberToRoman = string.Empty;
+        private int romanToNumber = 0;
 
         public string FromNumberToRoman(int number) {
             return GetPartialRomanNumber(number);
+        }
+        public int FromRomanToNumber(string roman) {
+            return GetPartialNumberRoman(roman);
+        }
+
+        private int GetPartialNumberRoman(string roman) {
+            romanToNumber += GetIntValue(roman.Substring(0, 1));
+            roman = roman.Substring(1);
+            if (roman != string.Empty) GetPartialNumberRoman(roman);
+            return romanToNumber;
+        }
+
+        private int GetIntValue(string roman) {
+            return numbers[roman];
         }
 
         private string GetPartialRomanNumber(int number) {
@@ -108,5 +151,6 @@ namespace RomanNumeralsSpecs {
             }
             return value;
         }
+
     }
 }
