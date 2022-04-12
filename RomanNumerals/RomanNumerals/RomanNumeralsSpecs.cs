@@ -63,6 +63,14 @@ namespace RomanNumeralsSpecs {
         [TestCase("IV", 4)]
         [TestCase("V", 5)]
         [TestCase("VI", 6)]
+        [TestCase("VII", 7)]
+        [TestCase("IX", 9)]
+        [TestCase("X", 10)]
+        [TestCase("XI", 11)]
+        [TestCase("XIV", 14)]
+        [TestCase("XIX", 19)]
+        [TestCase("XX", 20)]
+        [TestCase("CMXLIX", 949)]
         public void calculate_the_normal_numeral_from_roman_number(string roman, int number) {
             var romanNum = new RomanNumeral();
 
@@ -120,14 +128,10 @@ namespace RomanNumeralsSpecs {
             if (roman.Length > 1 && numbers.ContainsKey(roman.Substring(0, 2))) {
                 length = 2;
             }
-            romanToNumber += GetIntValue(roman.Substring(0, length)); ;
+            romanToNumber += numbers[roman.Substring(0, length)]; ;
             roman = roman.Substring(length);
             if (roman != string.Empty) GetPartialNumberRoman(roman);
             return romanToNumber;
-        }
-
-        private int GetIntValue(string roman) {
-            return numbers[roman];
         }
 
         private string GetPartialRomanNumber(int number) {
